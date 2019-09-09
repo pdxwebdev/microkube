@@ -6,7 +6,7 @@
   kind:             deposit  # Wallet kind (deposit, hot, warm, cold or fee).
   nsig:             1        # Number of signatures required for performing withdraw.
   max_balance:      0.0
-  status:           active
+  status:           disabled
   gateway:          geth     # Gateway client name.
   settings:
     #
@@ -22,7 +22,7 @@
   kind:             hot     # Wallet kind (deposit, hot, warm, cold or fee).
   nsig:             1       # Number of signatures required for performing withdraw.
   max_balance:      100.0
-  status:           active
+  status:           disabled
   gateway:          geth    # Gateway client name.
   settings:
     #
@@ -38,10 +38,24 @@
   kind:             warm    # Wallet kind (deposit, hot, warm, cold or fee).
   nsig:             1       # Number of signatures required for performing withdraw.
   max_balance:      1000.0
-  status:           active
+  status:           disabled
   gateway:          geth    # Gateway client name.
   settings:
     #
     # Geth gateway client settings.
     uri:          http://geth:8545
     secret:       'test'
+
+- name:             YadaCoin Deposit Wallet
+  blockchain_key:   yada
+  currency_id:      yada
+  # Address where deposits will be collected to.
+  address:          '13EbNJefRc95nkLFkJvJDycXkowW4sWqSe'  # IMPORTANT: Always wrap this value in quotes!
+  kind:             deposit    # Wallet kind (deposit, hot, warm, cold or fee).
+  max_balance:      1000.0
+  status:           active
+  gateway:          yada    # Gateway client name.
+  settings:
+    #
+    # Geth gateway client settings.
+    uri:          http://172.21.0.1:8002

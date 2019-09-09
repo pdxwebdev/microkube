@@ -1,25 +1,29 @@
 version: '3.6'
 
 services:
-  geth:
-    image: ethereum/client-go:stable
-    restart: always
-    command: |
-      --syncmode=full
-      --rinkeby
-      --rpc
-      --rpcaddr=0.0.0.0
-      --rpcport=8545
-      --port=30303
-      --rpcapi="db,personal,eth,net,web3"
-      --rpccorsdomain="*"
-      --rpcvhosts="*"
+  yada:
+    build: https://raw.githubusercontent.com/pdxwebdev/yadacoin/master/docker/serve/Dockerfile
+    ports: 
+      - 8002:8000
+    environment:
+      - PYTHONUNBUFFERED=0
     volumes:
-      - ../data/geth:/root/.ethereum/
-    expose:
-      - "8545"
-      - "30303"
-    labels:
-      traefik.enable: true
-      traefik.frontend.rule: 'Host: eth.<%= @config['app']['domain'] %>'
-      traefik.port: 8545
+      - ./config:/config
+    depends_on:
+      - mongodb
+  mongodb:
+    image: mongo:latest
+    container_name: "mongodb"
+    user: "mongodb"
+    environment:
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=/dev/null
+    volumes:
+      - ./data/db:/data/db
+      - ./data/logs:/data/logs
+    ports:
+      - 27017:27017
+    command:
+      - 'mongod'
+      - '--logpath'
+      - '/data/logs/logs.log'
