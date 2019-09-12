@@ -14,7 +14,7 @@ describe Microkube::Renderer do
         'email' => 'support@example.com'
       },
       'images' => {
-        'peatio' => 'rubykube/peatio:latest',
+        'peatio' => 'https://github.com/pdxwebdev/peatio.git branch2034',
         'barong' => 'rubykube/barong:latest',
         'frontend' => 'rubykube/mikroapp:latest',
         'tower' => 'rubykube/tower:latest'

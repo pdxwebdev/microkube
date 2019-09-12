@@ -1,7 +1,7 @@
 version: '3.6'
 
 x-daemon: &peatio-daemon
-  image: "<%= @config['images']['peatio'] %>"
+  build: "<%= @config['images']['peatio'] %>"
   restart: always
   env_file:
     - ../config/peatio.env
@@ -70,7 +70,7 @@ services:
     command: bash -c "bin/link_config && bundle exec ruby lib/daemons/k.rb"
 
   ranger:
-    image: "<%= @config['images']['peatio'] %>"
+    build: "<%= @config['images']['peatio'] %>"
     env_file:
       - ../config/ranger.env
     ports:
